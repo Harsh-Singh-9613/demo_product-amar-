@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201011095805) do
+ActiveRecord::Schema.define(version: 20201018094023) do
 
   create_table "sites", force: :cascade do |t|
     t.string   "name"
@@ -33,8 +33,10 @@ ActiveRecord::Schema.define(version: 20201011095805) do
     t.integer  "diesel_price"
     t.string   "chainage"
     t.integer  "site_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
+    t.boolean  "excavation_done",               default: true
+    t.boolean  "loading_and_trasportaion_done", default: true
   end
 
   create_table "users", force: :cascade do |t|
