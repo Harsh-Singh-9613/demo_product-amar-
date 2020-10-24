@@ -1,6 +1,6 @@
 class EmployeesController < ApplicationController
   include AttendancesHelper
-  before_action :find_employee, only:[:edit, :update, :destroy, :mark_attendance]
+  before_action :find_employee, only:[:edit, :update, :destroy, :show, :mark_attendance]
 
   def mark_attendance
     @attendance_record = check_employee_attendance_for_today(@employee)
@@ -27,6 +27,9 @@ class EmployeesController < ApplicationController
     else
       render :new
     end   
+  end
+
+  def show
   end
   
   def edit
