@@ -44,6 +44,9 @@ ActiveRecord::Schema.define(version: 20201023131542) do
     t.boolean "is_working"
   end
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "sites", force: :cascade do |t|
     t.string   "name"
     t.integer  "default_truck_capacity"
