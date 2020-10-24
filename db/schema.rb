@@ -11,7 +11,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201018094023) do
+ActiveRecord::Schema.define(version: 20201023131542) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "attendances", force: :cascade do |t|
+    t.date    "date"
+    t.string  "status"
+    t.integer "employee_id"
+  end
+
+  add_index "attendances", ["employee_id"], name: "index_attendances_on_employee_id", using: :btree
+
+  create_table "employee_payment_records", force: :cascade do |t|
+    t.date    "date"
+    t.integer "amount"
+    t.string  "description"
+    t.boolean "is_settled"
+    t.integer "employee_id"
+  end
+
+  add_index "employee_payment_records", ["employee_id"], name: "index_employee_payment_records_on_employee_id", using: :btree
+
+  create_table "employees", force: :cascade do |t|
+    t.string  "name"
+    t.integer "license_number"
+    t.integer "adhaar_number"
+    t.integer "mobile_number"
+    t.integer "salary"
+    t.string  "designation"
+    t.boolean "is_working"
+  end
 
   create_table "sites", force: :cascade do |t|
     t.string   "name"
@@ -51,7 +82,9 @@ ActiveRecord::Schema.define(version: 20201018094023) do
     t.integer  "mobile_no"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "attendances", "employees"
+  add_foreign_key "employee_payment_records", "employees"
 end
